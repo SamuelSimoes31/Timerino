@@ -65,25 +65,95 @@ void pickDigit(int x)  //Defined pickDigit (x), whose role is to open the port d
 }
 
 void pickNumber(int x){
-    byte num;
     switch(x){
-        case 1: num = 0b01100000; break;
-        case 2: num = 011011010; break;
-        case 3: num = 0b11110010; break;
-        case 4: num = 0b01100110; break;
-        case 5: num = 0b10110110; break;
-        case 6: num = 0b10111110; break;
-        case 7: num = 0b11100000; break;
-        case 8: num = 0b11111110; break;
-        case 9: num = 0b11110110; break;
-        default: num = 11111100; break;
+        case 1: digitalWrite(A, 0);
+                digitalWrite(B, 1);
+                digitalWrite(C, 1);
+                digitalWrite(D, 0);
+                digitalWrite(E, 0);
+                digitalWrite(F, 0);
+                digitalWrite(G, 0);
+                break;
+        case 2:  
+                digitalWrite(A, 1);
+                digitalWrite(B, 1);
+                digitalWrite(C, 0);
+                digitalWrite(D, 1);
+                digitalWrite(E, 1);
+                digitalWrite(F, 0);
+                digitalWrite(G, 1);
+                break;
+        case 3:  
+                digitalWrite(A, 1);
+                digitalWrite(B, 1);
+                digitalWrite(C, 1);
+                digitalWrite(D, 1);
+                digitalWrite(E, 0);
+                digitalWrite(F, 0);
+                digitalWrite(G, 1);
+                break;
+        case 4: 
+                digitalWrite(A, 0);
+                digitalWrite(B, 1);
+                digitalWrite(C, 1);
+                digitalWrite(D, 0);
+                digitalWrite(E, 0);
+                digitalWrite(F, 1);
+                digitalWrite(G, 1);
+                break;
+        case 5: 
+                digitalWrite(A, 1);
+                digitalWrite(B, 0);
+                digitalWrite(C, 1);
+                digitalWrite(D, 1);
+                digitalWrite(E, 0);
+                digitalWrite(F, 1);
+                digitalWrite(G, 1); 
+                break;
+        case 6: 
+                digitalWrite(A, 1);
+                digitalWrite(B, 0);
+                digitalWrite(C, 1);
+                digitalWrite(D, 1);
+                digitalWrite(E, 1);
+                digitalWrite(F, 1);
+                digitalWrite(G, 1); 
+                break;
+        case 7: 
+                digitalWrite(A, 1);
+                digitalWrite(B, 1);
+                digitalWrite(C, 1);
+                digitalWrite(D, 0);
+                digitalWrite(E, 0);
+                digitalWrite(F, 0);
+                digitalWrite(G, 0); 
+                break;
+        case 8:
+                digitalWrite(A, 1);
+                digitalWrite(B, 1);
+                digitalWrite(C, 1);
+                digitalWrite(D, 1);
+                digitalWrite(E, 1);
+                digitalWrite(F, 1);
+                digitalWrite(G, 1);
+                break;
+        case 9: 
+                digitalWrite(A, 1);
+                digitalWrite(B, 1);
+                digitalWrite(C, 1);
+                digitalWrite(D, 1);
+                digitalWrite(E, 0);
+                digitalWrite(F, 1);
+                digitalWrite(G, 1);
+                break;
+        default:
+                digitalWrite(A, 1);
+                digitalWrite(B, 1);
+                digitalWrite(C, 1);
+                digitalWrite(D, 1);
+                digitalWrite(E, 1);
+                digitalWrite(F, 1);
+                digitalWrite(G, 0);
+                break;
     }
-    digitalWrite(H, num&0x01);
-    digitalWrite(G, num&0x02);
-    digitalWrite(F, num&0x04);
-    digitalWrite(E, num&0x08);
-    digitalWrite(D, num&0x10);
-    digitalWrite(C, num&0x20);
-    digitalWrite(B, num&0x40);
-    digitalWrite(A, num&0x80);
 }
