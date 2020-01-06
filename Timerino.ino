@@ -1,3 +1,5 @@
+#include <TimerOne.h>
+
 #define A 5
 #define B 7
 #define C 11
@@ -7,11 +9,51 @@
 #define G 12
 #define H 10
 
-#define D1 A0
-#define D2 A1
-#define D3 A2
-#define D4 A3
+#define D1 A3
+#define D2 A2
+#define D3 A1
+#define D4 A0
 
+char digits[5];
+int time[3]={0}; //seg-min-hor
+void updateDigits(){
+    digits[1]=time[0]%10;
+    digits[2]=time[0]/10;
+    digits[3]=time[1]%10;
+    digits[4]=time[1]/10;
+
+
+}
+
+void updateDisplay(){
+    for(int i=1;i<=4;i++){
+    digitalWrite(A, 0);
+    digitalWrite(B, 0);
+    digitalWrite(C, 0);
+    digitalWrite(D, 0);
+    digitalWrite(E, 0);
+    digitalWrite(F, 0);
+    digitalWrite(G, 0);
+    pickDigit(i);
+    pickNumber(digits[i]);
+    //delayMicroseconds(200);
+    delay(1);
+    }
+}
+
+void tictac(){
+    updateDigits();
+    if(++time[0]==60){
+        time[0]=0;
+        if(++time[1]==60){
+            time[1]=0;
+            if(++time[2]==24){
+                time[2]=0;
+            }
+        }
+    }
+
+}
 
 void setup()
 {
@@ -28,26 +70,15 @@ void setup()
     pinMode(D3, OUTPUT);
     pinMode(D4, OUTPUT);
     
-    digitalWrite(A, 1);
-    digitalWrite(B, 1);
-    digitalWrite(C, 1);
-    digitalWrite(D, 1);
-    digitalWrite(E, 1);
-    digitalWrite(F, 1);
-    digitalWrite(G, 1);
-    digitalWrite(H, 1);
-    digitalWrite(D1, 0);
-    digitalWrite(D2, 0);
-    digitalWrite(D3, 0);
-    digitalWrite(D4, 0);
+    digitalWrite(H, 0);
 
-    pickDigit(3);
-    pickNumber(5);
+    Timer1.initialize(1000000);
+    Timer1.attachInterrupt(tictac);
 }
 
 void loop()
-{
-  
+{   
+    updateDisplay();
 }
 
 void pickDigit(int x)  //Defined pickDigit (x), whose role is to open the port dx
@@ -146,13 +177,22 @@ void pickNumber(int x){
                 digitalWrite(F, 1);
                 digitalWrite(G, 1);
                 break;
-        default:
+        case 0:
                 digitalWrite(A, 1);
                 digitalWrite(B, 1);
                 digitalWrite(C, 1);
                 digitalWrite(D, 1);
                 digitalWrite(E, 1);
                 digitalWrite(F, 1);
+                digitalWrite(G, 0);
+                break;
+        default:
+                digitalWrite(A, 1);
+                digitalWrite(B, 0);
+                digitalWrite(C, 0);
+                digitalWrite(D, 1);
+                digitalWrite(E, 0);
+                digitalWrite(F, 0);
                 digitalWrite(G, 0);
                 break;
     }
